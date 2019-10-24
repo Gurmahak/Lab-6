@@ -55,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
                     ArrayList<String> titles = new ArrayList<>(listings.length());
                     for (int i = 0; i < listings.length(); i++) {
                         JSONObject item = listings.getJSONObject(i);
+
+
                         titles.add(item.getJSONObject("data").getString("title"));
                         url.add(item.getJSONObject("data").getString("permalink"));
                     }
                     runOnUiThread(() -> {
-                        String result = titles.stream().reduce("", (a, b) -> a += "\n" + b);
-                        titles.add(result);
+//                        String result = titles.stream().reduce("", (a, b) -> a += "\n" + b);
+//                        titles.add(result);
                         ArrayAdapter arrayAdapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, titles);
                         listView.setAdapter(arrayAdapter);
                     });
@@ -81,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
 
                 String URL = url.get(position);
 
-                Log.d("url are", String.valueOf(URL));
-                Log.d("Position", String.valueOf(position));
+                Log.d("Url is", String.valueOf(URL));
+                Log.d("Position ", String.valueOf(position));
 
                 Intent intent = new Intent(MainActivity.this, RedditActivity.class);
                 intent.putExtra("url", URL);
